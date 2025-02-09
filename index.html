@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Chocolate Day</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('cdbg.png'); /* Add background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .message {
+            font-size: 24px;
+            margin-bottom: 20px; /* Reduce margin for better spacing */
+            color: #fff; 
+            font-family: 'Courgette';
+            text-shadow: 1px 1px 1px rgb(30, 30, 30); /* Add slight shadow for better readability */
+        }
+
+        button {
+            width: 80vw; /* Adjust button width to fit mobile screens */
+            max-width: 200px; /* Set maximum button width */
+            height: 40vw; /* Adjust button height relative to width */
+            max-height: 200px; /* Set maximum button height */
+            border-radius: 50%; /* Make the button circular */
+            background-color: #fff; /* Button background color */
+            color: #ce00b6; /* Button text color */
+            font-size: 16px; /* Adjust font size */
+            font-weight: bold;
+            text-align: center;
+            line-height: 40vw; /* Center the text vertically */
+            cursor: pointer;
+            box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.74);
+            position: relative; /* Position the GIF image relative to the button */
+            margin-bottom: 20px; /* Add margin for better spacing */
+        }
+
+        .gif-img {
+            position: absolute; /* Position the GIF image absolutely */
+            top: 50%; /* Align the GIF image to the center vertically */
+            left: 50%; /* Align the GIF image to the center horizontally */
+            transform: translate(-50%, -50%); /* Center the GIF image */
+            width: 60%; /* Adjust the width of the GIF image */
+            height: auto; /* Maintain aspect ratio of the GIF image */
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="container">
+        <div class="message">
+            Hey Janvi!<br>I have a chocolate for you.
+        </div>
+        <button class="button" onclick="openPage()">
+            <img class="gif-img" src="click.gif" alt="GIF Image">
+        </button>
+        <script>
+            function openPage() {
+                window.location.href = 'choco-maze.html';
+            }
+        </script>
+    </div>
+</body>
+</html>

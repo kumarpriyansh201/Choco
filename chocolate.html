@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eat Chocolate</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Protest+Revolution&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Honk:MORF,SHLN@13,61.2&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Honk:MORF,SHLN@13,61.2&family=Miltonian+Tattoo&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('chocbg.png'); /* Background image */
+            background-size: 7900px 7000px; /* Cover the entire viewport */
+            background-repeat: no-repeat; /* Prevent image from repeating */
+            color: #fff; /* Text color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .message {
+            margin-top: 10vh; /* Adjusted margin from the top */
+            margin-bottom: 5vh; /* Reduced margin */
+            font-size: 25px; /* Adjusted font size for smaller screens */
+            font-family: 'Lobster Two';
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow */
+        }
+
+        .message span {
+            color: red;
+            font-family: 'Honk';
+            font-size: 40px; /* Adjusted font size for smaller screens */
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Allow images to wrap on smaller screens */
+            padding: 10px; /* Added padding for better spacing */
+        }
+
+        .image-container img {
+            width: 200px; /* Adjusted image width for smaller screens */
+            height: 200px; /* Adjusted image height for smaller screens */
+            margin: 20px; /* Added margin for better spacing */
+            cursor: pointer;
+        }
+
+        #dustbin {
+            margin-top: 20px; /* Adjusted margin from the top */
+            cursor: pointer;
+            display: none; /* Initially hide the dustbin */
+        }
+
+        #dustbin img {
+            width: 80px; /* Adjusted dustbin image width for smaller screens */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        #dust {
+            font-weight: bold;
+            text-shadow: 1px 1px 1px black;
+            display: none; /* Initially hide the dustbin text */
+            font-size: 14px; /* Adjusted font size for smaller screens */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="message"><span>Tap</span> on the chocolate to eat it</div>
+    <div class="image-container">
+        <img id="image1" src="ch1.png" alt="Image 1" onclick="nextImage(this)">
+        <img id="image2" src="ch2.png" alt="Image 2" style="display: none;" onclick="nextImage(this)">
+        <img id="image3" src="ch3.png" alt="Image 3" style="display: none;" onclick="nextImage(this)">
+        <img id="image4" src="ch4.png" alt="Image 4" style="display: none;" onclick="nextImage(this)">
+        <img id="image5" src="ch5.png" alt="Image 5" style="display: none;" onclick="nextImage(this)">
+        <img id="image6" src="ch6.png" alt="Image 6" style="display: none;">
+    </div>
+    <div id="dustbin" onclick="openPage()">
+        <img src="dustbin.png" alt="Dustbin">
+        <div id="dust">Tap on it to put the trash</div>
+    </div>
+
+    <audio id="audio" src="aud.mp3" style="display: none;"></audio> <!-- Add audio element -->
+
+    <script>
+        function nextImage(currentImage) {
+            var currentId = currentImage.id;
+            var nextId = 'image' + (parseInt(currentId.substring(5)) + 1);
+            var nextImage = document.getElementById(nextId);
+            
+            currentImage.style.display = 'none';
+            if (nextImage) {
+                if (currentId === 'image5') {
+                    document.getElementById('dustbin').style.display = 'block';
+                    document.getElementById('dust').style.display = 'block';
+                }
+                if (currentId === 'image1'||currentId === 'image2'||currentId === 'image3'||currentId === 'image4'||currentId === 'image5') {
+                    document.getElementById('audio').play(); 
+                }
+                nextImage.style.display = 'block';
+            }
+        }
+
+        function openPage(){
+            window.location.href = 'choco-day.html';
+        }
+    </script>
+</body>
+</html>

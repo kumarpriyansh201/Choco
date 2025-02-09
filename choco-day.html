@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY CHOCOLATE DAY</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Honk:MORF,SHLN@13,61.2&family=Miltonian+Tattoo&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Honk:MORF,SHLN@13,61.2&family=Macondo&family=Macondo+Swash+Caps&family=Miltonian+Tattoo&display=swap');
+
+        body {
+            font-family: 'Macondo', sans-serif;
+            text-align: center;
+            background-image: url('chlt.jpg'); 
+            background-size: 7900px 7000px; 
+            background-repeat: no-repeat;
+            color: #fff; 
+            margin: 0;
+            padding: 0;
+        }
+
+        .message {
+            margin-top: 10vh; /* Adjusted margin from the top */
+            margin-bottom: 5vh; /* Adjusted margin from the bottom */
+            font-family: 'Macondo', sans-serif;
+            color: hotpink;
+            text-shadow: 1px 1px 1px  #000000;
+            font-weight: bold;
+            font-size: 18px; /* Adjusted font size for smaller screens */
+            opacity: 0;
+        }
+
+        .wish {
+            margin-top: 5vh; /* Adjusted margin from the top */
+            margin-bottom: 5vh; /* Adjusted margin from the bottom */
+            font-family: 'Great Vibes', cursive;
+            color: rgb(255, 0, 0);
+            text-shadow: 1px 1px 1px  #000000;
+            font-size: 24px; /* Adjusted font size for smaller screens */
+            opacity: 0;
+        }
+
+        .gif-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Allow images to wrap on smaller screens */
+            padding: 10px; /* Added padding for better spacing */
+        }
+
+        .gif-container img {
+            width: 100px; /* Adjusted image width for smaller screens */
+            height: auto; /* Maintain aspect ratio */
+            margin: 10px; /* Added margin for better spacing */
+            opacity: 0;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .message {
+                font-size: 20px; /* Adjusted font size for larger screens */
+            }
+
+            .wish {
+                font-size: 30px; /* Adjusted font size for larger screens */
+            }
+
+            .gif-container img {
+                width: 200px; /* Adjusted image width for larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message"></div>
+    <div class="wish">Happy Chocolate Day, Janvi🍫</div>
+    <div class="gif-container">
+        <img src="gif1.gif" alt="GIF 1">
+        <img src="gif2.gif" alt="GIF 2">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var message = document.querySelector('.message');
+            var wish = document.querySelector('.wish');
+            var gifContainer = document.querySelector('.gif-container');
+            var text = `Happy Chocolate Day, my dear bachchi,
+                        May our bond grow sweeter and richer.
+                        Forever and always, you'll be my guide,
+                        In this sweet journey called life's ride.`;
+            var lines = text.split('\n');
+            var duration = 7000;
+            var interval = duration / text.length;
+            var lineIndex = 0;
+            var charIndex = 0;
+
+            function revealText() {
+                if (lineIndex < lines.length) {
+                    var line = lines[lineIndex];
+                    if (charIndex < line.length) {
+                        message.style.opacity = '1';
+                        message.innerHTML += line[charIndex];
+                        charIndex++;
+                        setTimeout(revealText, interval);
+                    } else {
+                        message.innerHTML += '<br>';
+                        charIndex = 0;
+                        lineIndex++;
+                        setTimeout(revealText, interval);
+                    }
+                } else {
+                    showWish();
+                }
+            }
+
+            function showWish() {
+                var opacity = 0;
+                var fadeInInterval = setInterval(function() {
+                    opacity += 0.05;
+                    wish.style.opacity = opacity;
+                    if (opacity >= 1) {
+                        clearInterval(fadeInInterval);
+                        showGifs();
+                    }
+                }, 100);
+            }
+
+            function showGifs() {
+                var gifs = document.querySelectorAll('.gif-container img');
+                var opacity = 0;
+                var fadeInInterval = setInterval(function() {
+                    opacity += 0.25;
+                    gifs.forEach(function(gif) {
+                        gif.style.opacity = opacity;
+                    });
+                    if (opacity >= 1) {
+                        clearInterval(fadeInInterval);
+                    }
+                }, 100);
+            }
+
+            revealText();
+        });
+    </script>
+</body>
+</html>

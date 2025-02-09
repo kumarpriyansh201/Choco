@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Indie+Flower&family=Single+Day&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('eat.png'); /* Add background image */
+            background-size: 8000px 3500px; /* Cover the entire viewport */
+            background-repeat: no-repeat; /* Prevent image from repeating */
+            margin: 0;
+            padding: 0;
+        }
+
+        .message {
+            margin-top: 20vh; /* Adjusted margin from the top */
+            margin-bottom: 20vh;
+            font-size: 25px;
+            font-weight: bold;
+            color: #e3c9de;
+            font-family: 'Single Day';
+            text-shadow: 2px 2px 2px rgb(249, 0, 0);
+            padding: 0 20px; /* Added padding for better spacing */
+        }
+
+        .button {
+            margin-top: 20px;
+            font-family: 'Protest Revolution';
+            text-shadow: 1px 1px 1px white;
+            padding: 10px 20px;
+            font-size: 20px;
+            color: #a83d07;
+            background-color: #f8b184c1;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 2px 2px 2px  black;
+        }
+
+
+        @media only screen and (max-width: 720px) {
+            .message {
+/*                 font-size: 16px; /* Adjusted font size for smaller screens */ 
+                margin-top: 15vh; /* Adjusted margin for smaller screens */
+            }
+
+            .button {
+/*                 font-size: 16px; /* Adjusted font size for smaller screens */ 
+                padding: 8px 16px; /* Adjusted padding for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">CONGRATULATIONS!! <br> You've reached the end. <br>Tap Here to get your chocolate.</div>
+    <a class="button" href="chocolate.html">Get Chocolate</a>
+</body>
+</html>

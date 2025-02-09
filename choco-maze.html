@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze Game</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-image: url('cdbg.png'); /* Replace 'maze_background.jpg' with the path to your background image */
+            background-size: 720px 1280px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        #maze-container {
+            display: grid;
+            grid-template-columns: repeat(5, calc(20vw - 4px)); /* Adjust column width for mobile screens */
+            grid-template-rows: repeat(5, calc(20vw - 4px)); /* Adjust row height for mobile screens */
+            width: 90vw; /* Adjust container width for mobile screens */
+            height: 90vw; /* Adjust container height for mobile screens */
+            max-width: 500px; /* Set maximum width for larger screens */
+            max-height: 500px; /* Set maximum height for larger screens */
+            margin: auto;
+            border: 2px solid black;
+        }
+
+        .cell {
+            background-color: #f0f0f0; /* Adjust cell background color */
+            border: 1px solid #ccc; /* Adjust cell border color */
+        }
+
+        .player {
+            background-color: red; /* Adjust player color */
+        }
+
+        .exit {
+            background-image: url('c.jpg'); /* Replace 'exit_image.jpg' with the path to your exit image */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .obstacle {
+            background-color: black; /* Adjust obstacle color */
+        }
+
+        .control-buttons {
+            margin-top: 20px;
+        }
+        h3{
+            font-family: 'Indie Flower';
+            color: rgb(255, 255, 255);
+            text-align: center;
+            text-shadow: 2px 2px 2px rgba(255, 0, 0, 0.906);   
+        }
+
+        /* Adjust button styles for better mobile usability */
+        .control-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Reach The END To Get Chocolate!</h3>
+    <div id="maze-container"></div>
+    <div class="control-buttons">
+        <button id="up-button">Up</button>
+        <button id="left-button">Left</button>
+        <button id="right-button">Right</button>
+        <button id="down-button">Down</button>
+    </div>
+
+    <script>
+        // Maze dimensions
+        const rows = 5; // Reduced for mobile screens
+        const cols = 5; // Reduced for mobile screens
+
+        // Create the maze grid
+        const mazeContainer = document.getElementById('maze-container');
+        for (let i = 0; i < rows * cols; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            mazeContainer.appendChild(cell);
+        }
+
+        // Set player's initial position
+        let playerPosition = { row: 0, col: 0 };
+        const playerCell = document.querySelector(`#maze-container div:nth-child(1)`);
+        playerCell.classList.add('player');
+
+        // Set exit position
+        const exitPosition = { row: rows - 1, col: cols - 1 };
+        const exitCell = document.querySelector(`#maze-container div:nth-child(${rows * cols})`);
+        exitCell.classList.add('exit');
+
+        // Add obstacles
+        const numObstacles = 8; // Adjust the number of obstacles for mobile screens
+        for (let i = 0; i < numObstacles; i++) {
+            const randomRow = Math.floor(Math.random() * rows);
+            const randomCol = Math.floor(Math.random() * cols);
+            const obstacleIndex = randomRow * cols + randomCol;
+            const obstacleCell = mazeContainer.children[obstacleIndex];
+            obstacleCell.classList.add('obstacle');
+        }
+
+        // Handle key presses for player movement
+        document.addEventListener('keydown', (event) => {
+            const key = event.key.toLowerCase();
+            switch (key) {
+                case 'arrowup':
+                    movePlayer(-1, 0);
+                    break;
+                case 'arrowdown':
+                    movePlayer(1, 0);
+                    break;
+                case 'arrowleft':
+                    movePlayer(0, -1);
+                    break;
+                case 'arrowright':
+                    movePlayer(0, 1);
+                    break;
+            }
+        });
+
+        // Handle button clicks for player movement
+        document.getElementById('up-button').addEventListener('click', () => movePlayer(-1, 0));
+        document.getElementById('down-button').addEventListener('click', () => movePlayer(1, 0));
+        document.getElementById('left-button').addEventListener('click', () => movePlayer(0, -1));
+        document.getElementById('right-button').addEventListener('click', () => movePlayer(0, 1));
+
+        // Function to move the player
+        function movePlayer(rowOffset, colOffset) {
+            const newRow = playerPosition.row + rowOffset;
+            const newCol = playerPosition.col + colOffset;
+            if (isValidMove(newRow, newCol)) {
+                const newIndex = newRow * cols + newCol;
+                const oldIndex = playerPosition.row * cols + playerPosition.col;
+                const newCell = mazeContainer.children[newIndex];
+                const oldCell = mazeContainer.children[oldIndex];
+                if (!newCell.classList.contains('obstacle')) {
+                    oldCell.classList.remove('player');
+                    newCell.classList.add('player');
+                    playerPosition = { row: newRow, col: newCol };
+                    if (playerPosition.row === exitPosition.row && playerPosition.col === exitPosition.col) {
+                        window.location.href = 'eat.html'; // Redirect to eat.html when player reaches the exit
+                    }
+                }
+            }
+        }
+
+        // Function to check if a move is valid
+        function isValidMove(row, col) {
+            return row >= 0 && row < rows && col >= 0 && col < cols;
+        }
+    </script>
+</body>
+</html>
